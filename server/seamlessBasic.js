@@ -1,0 +1,80 @@
+var express = require('express');
+var router = express.Router();
+var config = require('./config.json');
+var enums = require('./helpers/enums');
+var signatureVerification = require('./helpers/signatureCreation');
+
+router.get('/index',(req, res, next)=>{
+    return res.status(200).render('seamlessBasic');
+});
+
+router.post('/result',(req, res, next)=>{
+    console.log("seamlessBasic result hit");
+    console.log(req.body);
+
+    const txnTypes = enums.transactionStatusEnum;
+    try{
+    switch(req.body.txStatus){
+        case txnTypes.cancelled: {
+            //buisness logic if payment was cancelled
+            return res.status(200).send({
+                status: "failed",
+                message: "transaction was cancelled by user",
+            });
+        }
+        case txnTypes.failed: {
+            //buisness logic if payment failed
+            const signature = req.body.signature;
+            const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+            if(derivedSignature !== signature){
+                throw {name:"signature missmatch", message:"there was a missmatch in signatures genereated and received"}
+            }
+            return res.status(200).send({
+                status: "failed",
+                message: "payment failure",
+            })
+        }
+        case txnTypes.success: {
+            //buisness logic if payments succeed
+            const signature = req.body.signature;
+            const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+            if(derivedSignature !== signature){
+                throw {name:"signature missmatch", message:"there was a missmatch in signatures genereated and received"}
+            }
+            return res.status(200).send({
+                status: "success",
+                message: "payment success",
+            })
+        }
+    }
+    }
+    catch(err){
+        console.log("err caught");
+        console.log(err);
+        return res.status(500).send({
+            status:"error",
+            err: err,
+            name: err.name,
+            message: err.message,
+        })
+    }
+
+    const signature = req.body.signature;
+    const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+    if(derivedSignature === signature){
+        console.log("works");
+        return res.status(200).send({
+            status:req.body.txStatus,
+        })
+    }
+    else{
+        console.log("signature gotten: ", signature);
+        console.log("signature derived: ", derivedSignature);
+        return res.status(200).send({
+            status: "error",
+            message: "signature mismatch",
+        })
+    }
+})
+
+module.exports = router;

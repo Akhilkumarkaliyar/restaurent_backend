@@ -1,0 +1,45 @@
+<!--<link rel="stylesheet" href="/css/style.css"/>-->
+<form id="seamlessBasic">
+    <%- include('partials/formBody') %>
+    <table>
+        <div class="radioBttns">
+        <tr>
+            <td>
+                <input class="paymentRadioInput" type="radio" id="card" name="paymentOption" value="card"
+                checked>
+                 <label disabled for="card">card</label>
+            </td>
+            <td>
+                <input class="paymentRadioInput" type="radio" id="nb" name="paymentOption" value="nb">
+                <label for="netBanking">net banking</label>
+            </td>
+            <td>
+                <input class="paymentRadioInput" type="radio" id="wallet" name="paymentOption" value="wallet">
+                <label for="wallets">wallets</label>
+            </td>
+            <td>
+                <input class="paymentRadioInput" type="radio" id="upi" name="paymentOption" value="upi">
+               <label for="upi">upi</label>
+            </td>
+
+        </tr>
+        </div>
+        <tr>
+        <td class="dynamicContentForm">
+
+        </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button type="submit" id="payBtn" >Pay Cashfree</button>
+
+                </td>
+        </tr>
+    </table>
+</form>
+<div id="resultDiv"></div>
+<script src="https://www.cashfree.com/assets/cashfree.sdk.v1.2.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/helper.js"></script>
+<script type="text/javascript" src="/javascripts/seamlessHelper.js"></script>
+<script type="text/javascript" src="/javascripts/seamlessBasic.js"></script>

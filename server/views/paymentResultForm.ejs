@@ -1,0 +1,15 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<body>
+    <h1>loading</h1>
+    <form id="payForm" method="POST" action=<%= cashfreePayUrl %>>
+        <% Object.keys(data).forEach((key)=>{ %>
+            <input type="hidden" name = <%= key%> value = <%= data[key]%>>
+            </input>
+        <% })%>
+    </form>
+    <script>
+        window.onload = function(){
+            document.getElementById('payForm').submit();
+        };
+    </script>
+</body>

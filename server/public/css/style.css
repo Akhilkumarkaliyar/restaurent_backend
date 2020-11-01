@@ -1,0 +1,22 @@
+input {
+    font-size: 1.2em;
+    margin: 1em;
+}
+
+button {
+    padding: 1em 2em;
+    background: #00b7b1;
+    color: white;
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: .5em;
+}
+
+button:hover {
+    background: #99e099;
+}
+
+.btnDisabled {
+    background: #535357;
+    color: white;
+}

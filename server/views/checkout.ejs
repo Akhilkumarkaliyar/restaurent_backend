@@ -1,0 +1,22 @@
+<title>
+    cashfree collect payments
+</title>
+<body>
+    <form id="checkoutForm" name="checkoutForm" method="POST" action= <%= postUrl %>>
+        <%- include('partials/formBody') %>
+        <table>
+        <tr>
+            <td colspan="2"><input type="submit" value="pay cashfree" id="payBtn" style="display:none" ></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button value="pay" id="submitBtn">pay</button></td>
+        </tr>
+        </table>
+    </form>
+    <div id="generatedSignature"></div>
+</body>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/helper.js"></script>
+
+<script type="text/javascript" src="/javascripts/script.js"></script>
